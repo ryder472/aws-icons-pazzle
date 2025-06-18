@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+# AWS ぷよぷよ
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AWSサービスアイコンを使用したぷよぷよ風パズルゲームです。実際のAWSアーキテクチャアイコンを使用し、同じカテゴリのサービス同士を4つ以上繋げて消すゲームです。
 
-## Available Scripts
+## 🎮 ゲーム概要
 
-In the project directory, you can run:
+### 基本ルール
+- **フィールド**: 縦12マス×横6マスの格子
+- **組ぷよ**: 2つ1組のAWSサービスアイコンが上から落下
+- **消去条件**: 同じカテゴリのアイコンが4つ以上縦横に繋がると消滅
+- **連鎖**: アイコン消滅後の重力で新たな組み合わせができると連鎖発生
+- **ゲームオーバー**: 3列目の最上段にアイコンが到達すると終了
 
-### `npm start`
+### AWSサービスカテゴリ
+1. **Compute（オレンジ）**: EC2, Lambda, Lightsail, Batch, Elastic Beanstalk
+2. **Storage（緑）**: S3, EFS, EBS, FSx
+3. **Database（青）**: Aurora, DynamoDB, ElastiCache, DocumentDB
+4. **Security（赤）**: Cognito, GuardDuty, Inspector, Detective
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🎯 操作方法
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| キー | 動作 |
+|------|------|
+| ← → | 組ぷよの左右移動 |
+| ↓ | 高速落下 |
+| ↑ / Space | 組ぷよの回転 |
 
-### `npm test`
+## 🚀 セットアップ
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 前提条件
+- Node.js (v14以上)
+- npm または yarn
 
-### `npm run build`
+### インストール
+```bash
+# リポジトリをクローン
+git clone <repository-url>
+cd aws-puyo-game
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 依存関係をインストール
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 開発サーバーを起動
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてゲームを開始できます。
 
-### `npm run eject`
+## 📁 プロジェクト構造
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+aws-puyo-game/
+├── public/
+│   ├── assets/                    # AWSアイコンファイル
+│   │   ├── Arch_Compute/48/      # Computeサービスアイコン
+│   │   ├── Arch_Storage/48/      # Storageサービスアイコン
+│   │   ├── Arch_Database/48/     # Databaseサービスアイコン
+│   │   └── Arch_Security-Identity-Compliance/48/  # Securityサービスアイコン
+│   └── index.html
+├── src/
+│   ├── App.js                    # メインゲームロジック
+│   ├── App.css                   # スタイルシート
+│   ├── awsIconsConfig.json       # アイコン設定ファイル
+│   └── index.js
+└── README.md
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🎨 技術仕様
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 使用技術
+- **React.js**: フロントエンドフレームワーク
+- **CSS3**: スタイリング（レスポンシブデザイン対応）
+- **JSON**: アイコン設定管理
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 主要機能
+- **正確なぷよぷよルール実装**
+  - 2つ1組の組ぷよシステム
+  - 4方向回転機能
+  - 個別ぷよ落下システム
+  - 連鎖システム
+- **AWSアイコン統合**
+  - 実際のAWSアーキテクチャアイコンを使用
+  - カテゴリベースの判定システム
+  - フォールバック機能付きアイコン表示
+- **ゲーム機能**
+  - スコアシステム（連鎖倍率対応）
+  - NEXTぷよ表示
+  - ゲームオーバー判定
+  - レスポンシブデザイン
 
-## Learn More
+## 🔧 設定ファイル
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### awsIconsConfig.json
+アイコンとカテゴリの対応関係を管理するJSONファイルです。新しいAWSサービスを追加する場合は、このファイルを編集してください。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```json
+{
+  "categories": {
+    "Arch_Compute": {
+      "name": "Compute",
+      "color": "#FF9900",
+      "icons": ["Arch_Amazon-EC2_48.png", ...]
+    }
+  }
+}
+```
 
-### Code Splitting
+## 🎮 ゲームプレイのコツ
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **連鎖を狙う**: 上から順番に消えるように配置すると大きな連鎖が可能
+2. **カテゴリを覚える**: 各AWSサービスがどのカテゴリに属するかを覚えると戦略的にプレイできます
+3. **回転を活用**: 組ぷよの回転を使って効率的に配置しましょう
+4. **NEXTを確認**: 次に来る組ぷよを確認して戦略を立てましょう
 
-### Analyzing the Bundle Size
+## 🐛 トラブルシューティング
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### アイコンが表示されない場合
+1. ブラウザの開発者ツールでコンソールエラーを確認
+2. `public/assets/` フォルダにアイコンファイルが存在するか確認
+3. `awsIconsConfig.json` のファイル名が正確か確認
 
-### Making a Progressive Web App
+### ゲームが動作しない場合
+1. Node.jsのバージョンを確認（v14以上推奨）
+2. `npm install` で依存関係を再インストール
+3. ブラウザのキャッシュをクリア
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📝 開発履歴
 
-### Advanced Configuration
+- **v1.0.0**: 基本的なぷよぷよゲーム実装
+- **v1.1.0**: AWSアイコン統合、カテゴリベース判定
+- **v1.2.0**: 個別ぷよ落下システム、連鎖システム改善
+- **v1.3.0**: アイコン読み込み修正、デバッグ機能追加
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🤝 コントリビューション
 
-### Deployment
+プルリクエストやイシューの報告を歓迎します。新しいAWSサービスの追加や機能改善のご提案をお待ちしています。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📄 ライセンス
 
-### `npm run build` fails to minify
+このプロジェクトはMITライセンスの下で公開されています。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🙏 謝辞
+
+- AWSアーキテクチャアイコンはAmazon Web Services, Inc.の提供によるものです
+- ぷよぷよのゲームルールは株式会社セガの「ぷよぷよ」を参考にしています
+
+---
+
+**楽しいAWSぷよぷよライフを！** 🎮☁️
