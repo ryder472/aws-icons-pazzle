@@ -1,6 +1,7 @@
 {
-  "name": "aws-puyo-game",
+  "name": "aws-icons-puzzle",
   "version": "0.1.0",
+  "description": "AWS Icons Puzzle - A puzzle game using AWS service icons",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",

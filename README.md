@@ -1,4 +1,4 @@
-# AWS ぷよぷよ
+# AWS Icons Puzzle
 
 AWSサービスアイコンを使用したぷよぷよ風パズルゲームです。実際のAWSアーキテクチャアイコンを使用し、同じカテゴリのサービス同士を4つ以上繋げて消すゲームです。
 
@@ -38,7 +38,7 @@ AWSサービスアイコンを使用したぷよぷよ風パズルゲームで�
 ```bash
 # リポジトリをクローン
 git clone <repository-url>
-cd aws-puyo-game
+cd aws-icons-puzzle
 
 # 依存関係をインストール
 npm install
@@ -52,7 +52,7 @@ npm start
 ## 📁 プロジェクト構造
 
 ```
-aws-puyo-game/
+aws-icons-puzzle/
 ├── public/
 │   ├── assets/                    # AWSアイコンファイル
 │   │   ├── Arch_Compute/48/      # Computeサービスアイコン
@@ -122,6 +122,7 @@ aws-puyo-game/
 - **v1.1.0**: AWSアイコン統合、カテゴリベース判定
 - **v1.2.0**: 個別ぷよ落下システム、連鎖システム改善
 - **v1.3.0**: アイコン読み込み修正、デバッグ機能追加
+- **v1.4.0**: AWS Icons Puzzleに名称変更、プロジェクト最適化
 
 ## 🤝 コントリビューション
 
@@ -138,4 +139,4 @@ aws-puyo-game/
 
 ---
 
-**楽しいAWSぷよぷよライフを！** 🎮☁️
+**楽しいAWS Icons Puzzleライフを！** 🎮☁️
