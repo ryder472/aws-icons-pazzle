@@ -12,10 +12,12 @@ AWSサービスアイコンを使用したぷよぷよ風パズルゲームで�
 - **ゲームオーバー**: 3列目の最上段にアイコンが到達すると終了
 
 ### AWSサービスカテゴリ
-1. **Compute（オレンジ）**: EC2, Lambda, Lightsail, Batch, Elastic Beanstalk
-2. **Storage（緑）**: S3, EFS, EBS, FSx
-3. **Database（青）**: Aurora, DynamoDB, ElastiCache, DocumentDB
-4. **Security（赤）**: Cognito, GuardDuty, Inspector, Detective
+1. **Compute（オレンジ）- 5サービス**: Amazon EC2, AWS Lambda, Amazon Lightsail, AWS Batch, AWS Elastic Beanstalk
+2. **Storage（緑）- 4サービス**: Amazon S3, Amazon EFS, Amazon EBS, Amazon FSx
+3. **Database（青）- 4サービス**: Amazon Aurora, Amazon DynamoDB, Amazon ElastiCache, Amazon DocumentDB
+4. **Security（赤）- 4サービス**: Amazon Cognito, Amazon GuardDuty, Amazon Inspector, Amazon Detective
+
+**合計**: 4カテゴリ、17のAWSサービス
 
 ## 🎯 操作方法
 
@@ -99,8 +101,25 @@ aws-puyo-game/
     "Arch_Compute": {
       "name": "Compute",
       "color": "#FF9900",
-      "icons": ["Arch_Amazon-EC2_48.png", ...]
+      "icons": [
+        "Arch_Amazon-EC2_48.png",
+        "Arch_AWS-Lambda_48.png",
+        "Arch_Amazon-Lightsail_48.png",
+        "Arch_AWS-Batch_48.png",
+        "Arch_AWS-Elastic-Beanstalk_48.png"
+      ]
+    },
+    "Arch_Storage": {
+      "name": "Storage", 
+      "color": "#569A31",
+      "icons": [
+        "Arch_Amazon-Simple-Storage-Service_48.png",
+        "Arch_Amazon-EFS_48.png",
+        "Arch_Amazon-Elastic-Block-Store_48.png",
+        "Arch_Amazon-FSx_48.png"
+      ]
     }
+    // ... 他のカテゴリ
   }
 }
 ```
