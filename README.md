@@ -16,8 +16,9 @@ AWSサービスアイコンを使用したぷよぷよ風パズルゲームで�
 2. **Storage（緑）- 4サービス**: Amazon S3, Amazon EFS, Amazon EBS, Amazon FSx
 3. **Database（青）- 4サービス**: Amazon Aurora, Amazon DynamoDB, Amazon ElastiCache, Amazon DocumentDB
 4. **Security（赤）- 4サービス**: Amazon Cognito, Amazon GuardDuty, Amazon Inspector, Amazon Detective
+5. **AI/ML（紫）- 5サービス**: Amazon Bedrock, Amazon Rekognition, Amazon Comprehend, Amazon Lex, Amazon Polly
 
-**合計**: 4カテゴリ、17のAWSサービス
+**合計**: 5カテゴリ、22のAWSサービス
 
 ## 🎯 操作方法
 
@@ -57,7 +58,8 @@ aws-puyo-game/
 │   │   ├── Arch_Compute/48/      # Computeサービスアイコン
 │   │   ├── Arch_Storage/48/      # Storageサービスアイコン
 │   │   ├── Arch_Database/48/     # Databaseサービスアイコン
-│   │   └── Arch_Security-Identity-Compliance/48/  # Securityサービスアイコン
+│   │   ├── Arch_Security-Identity-Compliance/48/  # Securityサービスアイコン
+│   │   └── Arch_Artificial-Intelligence/48/       # AI/MLサービスアイコン
 │   └── index.html
 ├── src/
 │   ├── App.js                    # メインゲームロジック
@@ -117,6 +119,17 @@ aws-puyo-game/
         "Arch_Amazon-EFS_48.png",
         "Arch_Amazon-Elastic-Block-Store_48.png",
         "Arch_Amazon-FSx_48.png"
+      ]
+    },
+    "Arch_Artificial-Intelligence": {
+      "name": "AI/ML",
+      "color": "#8C4FFF",
+      "icons": [
+        "Arch_Amazon-Bedrock_48.png",
+        "Arch_Amazon-Rekognition_48.png",
+        "Arch_Amazon-Comprehend_48.png",
+        "Arch_Amazon-Lex_48.png",
+        "Arch_Amazon-Polly_48.png"
       ]
     }
     // ... 他のカテゴリ

@@ -40,6 +40,17 @@
         "Arch_Amazon-Inspector_48.png",
         "Arch_Amazon-Detective_48.png"
       ]
+    },
+    "Arch_Artificial-Intelligence": {
+      "name": "AI/ML",
+      "color": "#8C4FFF",
+      "icons": [
+        "Arch_Amazon-Bedrock_48.png",
+        "Arch_Amazon-Rekognition_48.png",
+        "Arch_Amazon-Comprehend_48.png",
+        "Arch_Amazon-Lex_48.png",
+        "Arch_Amazon-Polly_48.png"
+      ]
     }
   }
 }
