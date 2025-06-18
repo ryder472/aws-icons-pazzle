@@ -119,49 +119,54 @@ function App() {
       }
     }
 
-    // 重力を適用
-    applyGravity(newBoard, () => {
-      // 重力適用後に連鎖チェック
-      checkChains(newBoard, 0);
-    });
+    setBoard(newBoard);
 
     // 次のピースを設定
     setCurrentPiece(nextPiece);
     setNextPiece(generateNewPiece());
+
+    // 少し遅延してから連鎖チェックを開始
+    setTimeout(() => {
+      checkChains(newBoard, 0);
+    }, 100);
   }, [board, nextPiece]);
 
   // 重力を適用
-  const applyGravity = (currentBoard, callback) => {
-    let hasChanged = false;
-    const newBoard = currentBoard.map(row => [...row]);
+  const applyGravity = (currentBoard) => {
+    return new Promise((resolve) => {
+      let hasChanged = false;
+      const newBoard = Array(BOARD_HEIGHT).fill(null).map(() => Array(BOARD_WIDTH).fill(null));
 
-    for (let x = 0; x < BOARD_WIDTH; x++) {
-      let writeIndex = BOARD_HEIGHT - 1;
-      for (let y = BOARD_HEIGHT - 1; y >= 0; y--) {
-        if (currentBoard[y][x] !== null) {
-          if (writeIndex !== y) {
-            hasChanged = true;
+      // 各列について下から詰める
+      for (let x = 0; x < BOARD_WIDTH; x++) {
+        let writeIndex = BOARD_HEIGHT - 1;
+        for (let y = BOARD_HEIGHT - 1; y >= 0; y--) {
+          if (currentBoard[y][x] !== null) {
+            newBoard[writeIndex][x] = currentBoard[y][x];
+            if (writeIndex !== y) {
+              hasChanged = true;
+            }
+            writeIndex--;
           }
-          newBoard[writeIndex][x] = currentBoard[y][x];
-          if (writeIndex !== y) {
-            newBoard[y][x] = null;
-          }
-          writeIndex--;
         }
       }
-    }
 
-    setBoard(newBoard);
-    
-    if (hasChanged) {
-      setTimeout(() => applyGravity(newBoard, callback), 200);
-    } else if (callback) {
-      setTimeout(callback, 100);
-    }
+      setBoard(newBoard);
+      
+      if (hasChanged) {
+        // 重力が適用された場合、再度重力をチェック
+        setTimeout(() => {
+          applyGravity(newBoard).then(resolve);
+        }, 150);
+      } else {
+        // 重力が完了した場合
+        setTimeout(() => resolve(newBoard), 100);
+      }
+    });
   };
 
   // 連鎖チェック
-  const checkChains = (currentBoard, currentChain) => {
+  const checkChains = async (currentBoard, currentChain) => {
     const visited = Array(BOARD_HEIGHT).fill(null).map(() => Array(BOARD_WIDTH).fill(false));
     let hasMatches = false;
     let totalPuyoCount = 0;
@@ -211,11 +216,14 @@ function App() {
 
       setBoard(newBoard);
       
-      // 重力適用後に再度連鎖チェック
-      setTimeout(() => {
-        applyGravity(newBoard, () => {
-          checkChains(newBoard, newChain);
-        });
+      // ぷよ消滅のアニメーション時間を待つ
+      setTimeout(async () => {
+        // 重力を適用してぷよを落下させる
+        const gravityBoard = await applyGravity(newBoard);
+        // 重力適用後に再度連鎖チェック
+        setTimeout(() => {
+          checkChains(gravityBoard, newChain);
+        }, 200);
       }, 300);
     } else {
       setBoard(newBoard);
