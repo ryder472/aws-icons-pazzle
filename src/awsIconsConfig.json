@@ -1,0 +1,45 @@
+{
+  "categories": {
+    "Arch_Compute": {
+      "name": "Compute",
+      "color": "#FF9900",
+      "icons": [
+        "Arch_Amazon-EC2_48.png",
+        "Arch_AWS-Lambda_48.png",
+        "Arch_Amazon-Lightsail_48.png",
+        "Arch_AWS-Batch_48.png",
+        "Arch_AWS-Elastic-Beanstalk_48.png"
+      ]
+    },
+    "Arch_Storage": {
+      "name": "Storage", 
+      "color": "#569A31",
+      "icons": [
+        "Arch_Amazon-EFS_48.png",
+        "Arch_Amazon-Elastic-Block-Store_48.png",
+        "Arch_Amazon-FSx_48.png",
+        "Arch_Amazon-File-Cache_48.png"
+      ]
+    },
+    "Arch_Database": {
+      "name": "Database",
+      "color": "#3F48CC", 
+      "icons": [
+        "Arch_Amazon-Aurora_48.png",
+        "Arch_Amazon-DynamoDB_48.png",
+        "Arch_Amazon-ElastiCache_48.png",
+        "Arch_Amazon-DocumentDB_48.png"
+      ]
+    },
+    "Arch_Security-Identity-Compliance": {
+      "name": "Security",
+      "color": "#FF4B4B",
+      "icons": [
+        "Arch_Amazon-Cognito_48.png",
+        "Arch_Amazon-GuardDuty_48.png",
+        "Arch_Amazon-Inspector_48.png",
+        "Arch_Amazon-Detective_48.png"
+      ]
+    }
+  }
+}

@@ -1,13 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
+import awsIconsConfig from './awsIconsConfig.json';
 
-// AWSサービスアイコンの定義（色とサービス名）
-const AWS_SERVICES = [
-  { name: 'EC2', color: '#FF9900', symbol: '🖥️' },
-  { name: 'S3', color: '#569A31', symbol: '🪣' },
-  { name: 'Lambda', color: '#FF4B4B', symbol: '⚡' },
-  { name: 'RDS', color: '#3F48CC', symbol: '🗄️' },
-];
+// AWSサービスアイコンの定義（ディレクトリベース）
+const AWS_SERVICES = [];
+
+// JSONファイルからサービス情報を読み込み
+Object.entries(awsIconsConfig.categories).forEach(([categoryKey, categoryData]) => {
+  categoryData.icons.forEach(iconFile => {
+    AWS_SERVICES.push({
+      name: iconFile.replace('Arch_', '').replace('_48.png', '').replace(/-/g, ' '),
+      category: categoryKey,
+      color: categoryData.color,
+      iconPath: `/src/assets/${categoryKey}/48/${iconFile}`,
+      iconFile: iconFile
+    });
+  });
+});
 
 const BOARD_WIDTH = 6;
 const BOARD_HEIGHT = 13; // 上方向に1マス追加（画面外）
@@ -213,19 +222,19 @@ function App() {
     let hasMatches = false;
     let totalPuyoCount = 0;
 
-    const findConnectedPuyos = (x, y, color, connected = []) => {
+    const findConnectedPuyos = (x, y, category, connected = []) => {
       if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) return connected;
       if (visited[y][x] || currentBoard[y][x] === null) return connected;
-      if (currentBoard[y][x].color !== color) return connected;
+      if (currentBoard[y][x].category !== category) return connected;
 
       visited[y][x] = true;
       connected.push({ x, y });
 
       // 4方向をチェック
-      findConnectedPuyos(x + 1, y, color, connected);
-      findConnectedPuyos(x - 1, y, color, connected);
-      findConnectedPuyos(x, y + 1, color, connected);
-      findConnectedPuyos(x, y - 1, color, connected);
+      findConnectedPuyos(x + 1, y, category, connected);
+      findConnectedPuyos(x - 1, y, category, connected);
+      findConnectedPuyos(x, y + 1, category, connected);
+      findConnectedPuyos(x, y - 1, category, connected);
 
       return connected;
     };
@@ -235,7 +244,7 @@ function App() {
     for (let y = 0; y < BOARD_HEIGHT; y++) {
       for (let x = 0; x < BOARD_WIDTH; x++) {
         if (!visited[y][x] && currentBoard[y][x] !== null) {
-          const connected = findConnectedPuyos(x, y, currentBoard[y][x].color);
+          const connected = findConnectedPuyos(x, y, currentBoard[y][x].category);
           if (connected.length >= 4) {
             hasMatches = true;
             totalPuyoCount += connected.length;
@@ -386,8 +395,19 @@ function App() {
           >
             {cell && (
               <div className="service-icon">
-                <span className="service-symbol">{cell.symbol}</span>
-                <span className="service-name">{cell.name}</span>
+                <img 
+                  src={cell.iconPath} 
+                  alt={cell.name}
+                  className="service-image"
+                  onError={(e) => {
+                    // フォールバック: アイコンが読み込めない場合はテキストを表示
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <span className="service-name fallback-text" style={{display: 'none'}}>
+                  {cell.name}
+                </span>
               </div>
             )}
           </div>
@@ -407,15 +427,35 @@ function App() {
             className="next-puyo"
             style={{ backgroundColor: nextPiece.sub.color }}
           >
-            <span>{nextPiece.sub.symbol}</span>
-            <span>{nextPiece.sub.name}</span>
+            <img 
+              src={nextPiece.sub.iconPath} 
+              alt={nextPiece.sub.name}
+              className="next-service-image"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <span className="next-service-name fallback-text" style={{display: 'none'}}>
+              {nextPiece.sub.name}
+            </span>
           </div>
           <div 
             className="next-puyo"
             style={{ backgroundColor: nextPiece.main.color }}
           >
-            <span>{nextPiece.main.symbol}</span>
-            <span>{nextPiece.main.name}</span>
+            <img 
+              src={nextPiece.main.iconPath} 
+              alt={nextPiece.main.name}
+              className="next-service-image"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <span className="next-service-name fallback-text" style={{display: 'none'}}>
+              {nextPiece.main.name}
+            </span>
           </div>
         </div>
       </div>

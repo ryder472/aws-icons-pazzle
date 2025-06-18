@@ -144,6 +144,39 @@
   background-color: rgba(255, 75, 75, 0.1) !important;
 }
 
+.service-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.next-service-image {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.fallback-text {
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  text-align: center;
+  line-height: 1;
+}
+
+.next-service-name {
+  font-size: 0.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  text-align: center;
+  line-height: 1;
+  margin-top: 2px;
+}
+
 .service-icon {
   display: flex;
   flex-direction: column;
@@ -155,18 +188,7 @@
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
 }
 
-.service-symbol {
-  font-size: 1.2rem;
-  margin-bottom: 2px;
-}
 
-.service-name {
-  font-size: 0.6rem;
-  font-weight: bold;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  line-height: 1;
-}
 
 .game-controls {
   margin-top: 30px;
@@ -235,17 +257,23 @@
     height: 40px;
   }
   
-  .service-symbol {
-    font-size: 1rem;
+  .service-image {
+    width: 30px;
+    height: 30px;
   }
   
-  .service-name {
-    font-size: 0.5rem;
+  .next-service-image {
+    width: 25px;
+    height: 25px;
   }
 
   .next-puyo {
     width: 50px;
     height: 50px;
+  }
+  
+  .fallback-text {
+    font-size: 0.5rem;
   }
 }
 
