@@ -97,46 +97,6 @@ aws-puyo-game/
 ### awsIconsConfig.json
 アイコンとカテゴリの対応関係を管理するJSONファイルです。新しいAWSサービスを追加する場合は、このファイルを編集してください。
 
-```json
-{
-  "categories": {
-    "Arch_Compute": {
-      "name": "Compute",
-      "color": "#FF9900",
-      "icons": [
-        "Arch_Amazon-EC2_48.png",
-        "Arch_AWS-Lambda_48.png",
-        "Arch_Amazon-Lightsail_48.png",
-        "Arch_AWS-Batch_48.png",
-        "Arch_AWS-Elastic-Beanstalk_48.png"
-      ]
-    },
-    "Arch_Storage": {
-      "name": "Storage", 
-      "color": "#569A31",
-      "icons": [
-        "Arch_Amazon-Simple-Storage-Service_48.png",
-        "Arch_Amazon-EFS_48.png",
-        "Arch_Amazon-Elastic-Block-Store_48.png",
-        "Arch_Amazon-FSx_48.png"
-      ]
-    },
-    "Arch_Artificial-Intelligence": {
-      "name": "AI/ML",
-      "color": "#8C4FFF",
-      "icons": [
-        "Arch_Amazon-Bedrock_48.png",
-        "Arch_Amazon-Rekognition_48.png",
-        "Arch_Amazon-Comprehend_48.png",
-        "Arch_Amazon-Lex_48.png",
-        "Arch_Amazon-Polly_48.png"
-      ]
-    }
-    // ... 他のカテゴリ
-  }
-}
-```
-
 ## 🎮 ゲームプレイのコツ
 
 1. **連鎖を狙う**: 上から順番に消えるように配置すると大きな連鎖が可能
