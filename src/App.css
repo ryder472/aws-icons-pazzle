@@ -1,38 +1,272 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color: #282c34;
+  min-height: 100vh;
+  color: white;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  padding: 20px;
+}
+
+.App-header h1 {
+  margin-bottom: 20px;
+  color: #FF9900;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 200px;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FF9900;
+  background-color: rgba(255, 153, 0, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #FF9900;
+}
+
+.chain-display {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #FF4B4B;
+  background-color: rgba(255, 75, 75, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #FF4B4B;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.next-piece h3 {
+  margin-bottom: 10px;
+  color: #61dafb;
+}
+
+.next-piece-container {
+  display: flex;
+  justify-content: center;
+}
+
+.next-piece-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.next-puyo {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-.App-link {
+.next-puyo span:first-child {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.next-puyo span:last-child {
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+.controls {
+  background-color: rgba(97, 218, 251, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #61dafb;
+}
+
+.controls h3 {
+  margin-top: 0;
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.controls p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #FF9900;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  padding: 5px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.board-row {
+  display: flex;
+}
+
+.board-cell {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.board-cell.danger-zone {
+  border: 2px solid #FF4B4B !important;
+  background-color: rgba(255, 75, 75, 0.1) !important;
+}
+
+.service-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+.service-symbol {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.service-name {
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  line-height: 1;
+}
+
+.game-controls {
+  margin-top: 30px;
+}
+
+.start-button {
+  background: linear-gradient(45deg, #FF9900, #FFB84D);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  background: linear-gradient(45deg, #E68A00, #FF9900);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+.start-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.game-over {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid #ff4444;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.game-over h2 {
+  color: #ff4444;
+  margin-bottom: 10px;
+}
+
+.game-over p {
+  font-size: 1.2rem;
+  color: #FF9900;
+  font-weight: bold;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .game-info {
+    order: 2;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .board-cell {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .service-symbol {
+    font-size: 1rem;
+  }
+  
+  .service-name {
+    font-size: 0.5rem;
+  }
+
+  .next-puyo {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* アニメーション効果 */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: scale(0.8);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: scale(1);
   }
+}
+
+.service-icon {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ホバー効果 */
+.board-cell:hover {
+  transform: scale(1.05);
+  z-index: 1;
 }
