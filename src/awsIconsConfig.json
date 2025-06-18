@@ -15,10 +15,10 @@
       "name": "Storage", 
       "color": "#569A31",
       "icons": [
+        "Arch_Amazon-Simple-Storage-Service_48.png",
         "Arch_Amazon-EFS_48.png",
         "Arch_Amazon-Elastic-Block-Store_48.png",
-        "Arch_Amazon-FSx_48.png",
-        "Arch_Amazon-File-Cache_48.png"
+        "Arch_Amazon-FSx_48.png"
       ]
     },
     "Arch_Database": {

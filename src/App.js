@@ -12,11 +12,14 @@ Object.entries(awsIconsConfig.categories).forEach(([categoryKey, categoryData]) 
       name: iconFile.replace('Arch_', '').replace('_48.png', '').replace(/-/g, ' '),
       category: categoryKey,
       color: categoryData.color,
-      iconPath: `/src/assets/${categoryKey}/48/${iconFile}`,
+      iconPath: `/assets/${categoryKey}/48/${iconFile}`,
       iconFile: iconFile
     });
   });
 });
+
+// デバッグ用: サービス一覧をコンソールに出力
+console.log('AWS_SERVICES loaded:', AWS_SERVICES);
 
 const BOARD_WIDTH = 6;
 const BOARD_HEIGHT = 13; // 上方向に1マス追加（画面外）
@@ -399,7 +402,11 @@ function App() {
                   src={cell.iconPath} 
                   alt={cell.name}
                   className="service-image"
+                  onLoad={() => {
+                    console.log(`Successfully loaded: ${cell.iconPath}`);
+                  }}
                   onError={(e) => {
+                    console.error(`Failed to load icon: ${cell.iconPath}`);
                     // フォールバック: アイコンが読み込めない場合はテキストを表示
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
@@ -431,7 +438,11 @@ function App() {
               src={nextPiece.sub.iconPath} 
               alt={nextPiece.sub.name}
               className="next-service-image"
+              onLoad={() => {
+                console.log(`Successfully loaded NEXT: ${nextPiece.sub.iconPath}`);
+              }}
               onError={(e) => {
+                console.error(`Failed to load NEXT icon: ${nextPiece.sub.iconPath}`);
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
@@ -448,7 +459,11 @@ function App() {
               src={nextPiece.main.iconPath} 
               alt={nextPiece.main.name}
               className="next-service-image"
+              onLoad={() => {
+                console.log(`Successfully loaded NEXT: ${nextPiece.main.iconPath}`);
+              }}
               onError={(e) => {
+                console.error(`Failed to load NEXT icon: ${nextPiece.main.iconPath}`);
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
