@@ -97,8 +97,56 @@ function App() {
     return true;
   };
 
+  // 個別のぷよを落下させる（組ぷよの各ぷよが独立して落下）
+  const dropIndividualPuyo = (board, x, y, puyo) => {
+    const newBoard = board.map(row => [...row]);
+    
+    // 現在の位置をクリア
+    newBoard[y][x] = null;
+    
+    // 落下先を探す
+    let dropY = y;
+    while (dropY + 1 < BOARD_HEIGHT && newBoard[dropY + 1][x] === null) {
+      dropY++;
+    }
+    
+    // 新しい位置に配置
+    newBoard[dropY][x] = puyo;
+    
+    return { board: newBoard, moved: dropY !== y };
+  };
+
+  // 個別のぷよを段階的に落下させる（アニメーション付き）
+  const dropIndividualPuyoAnimated = async (board, positions) => {
+    let currentBoard = board.map(row => [...row]);
+    let totalMoved = false;
+    
+    // 各ぷよを配置
+    for (const pos of positions) {
+      if (pos.y >= 0) {
+        currentBoard[pos.y][pos.x] = pos.puyo;
+      }
+    }
+    
+    // 各ぷよを個別に落下させる
+    for (const pos of positions) {
+      if (pos.y >= 0) {
+        const result = dropIndividualPuyo(currentBoard, pos.x, pos.y, pos.puyo);
+        currentBoard = result.board;
+        if (result.moved) {
+          totalMoved = true;
+          // 落下アニメーションのための短い遅延
+          setBoard([...currentBoard]);
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+      }
+    }
+    
+    return { board: currentBoard, moved: totalMoved };
+  };
+
   // ピースを固定
-  const placePiece = useCallback((piece) => {
+  const placePiece = useCallback(async (piece) => {
     const positions = getPiecePositions(piece);
     
     // ゲームオーバーチェック（3列目の最上段に触れる）
@@ -110,25 +158,19 @@ function App() {
       }
     }
 
-    const newBoard = board.map(row => [...row]);
-    
-    // 組ぷよを配置
-    for (const pos of positions) {
-      if (pos.y >= 0) {
-        newBoard[pos.y][pos.x] = pos.puyo;
-      }
-    }
-
-    setBoard(newBoard);
+    // 組ぷよの各ぷよを個別に配置し、必要に応じて落下させる
+    const result = await dropIndividualPuyoAnimated(board, positions);
+    setBoard(result.board);
 
     // 次のピースを設定
     setCurrentPiece(nextPiece);
     setNextPiece(generateNewPiece());
 
-    // 少し遅延してから連鎖チェックを開始
+    // 個別落下が完了してから連鎖チェックを開始
+    const delay = result.moved ? 200 : 100;
     setTimeout(() => {
-      checkChains(newBoard, 0);
-    }, 100);
+      checkChains(result.board, 0);
+    }, delay);
   }, [board, nextPiece]);
 
   // 重力を適用
@@ -231,6 +273,24 @@ function App() {
     }
   };
 
+  // 組ぷよの各ぷよが個別に落下可能かチェック
+  const checkIndividualFall = (piece) => {
+    const positions = getPiecePositions(piece);
+    let shouldPlace = false;
+    
+    for (const pos of positions) {
+      // 各ぷよについて、下に移動できるかチェック
+      if (pos.y + 1 >= BOARD_HEIGHT || 
+          (pos.y + 1 >= 0 && board[pos.y + 1][pos.x] !== null)) {
+        // このぷよは下に移動できない
+        shouldPlace = true;
+        break;
+      }
+    }
+    
+    return shouldPlace;
+  };
+
   // ピースの移動
   const movePiece = (dx, dy) => {
     if (!currentPiece || gameOver) return;
@@ -241,8 +301,11 @@ function App() {
     if (canPlacePiece(currentPiece, newX, newY)) {
       setCurrentPiece({ ...currentPiece, x: newX, y: newY });
     } else if (dy > 0) {
-      // 下に移動できない場合はピースを固定
-      placePiece(currentPiece);
+      // 下に移動できない場合、個別落下ルールをチェック
+      if (checkIndividualFall(currentPiece)) {
+        // 組ぷよのいずれかが着地したので固定
+        placePiece(currentPiece);
+      }
     }
   };
 
