@@ -37,8 +37,8 @@ AWSサービスアイコンを使用したぷよぷよ風パズルゲームで�
 ### インストール
 ```bash
 # リポジトリをクローン
-git clone <repository-url>
-cd aws-icons-puzzle
+git clone https://github.com/ryder472/aws-icons-pazzle.git
+cd aws-icon-pazzle
 
 # 依存関係をインストール
 npm install
@@ -52,7 +52,7 @@ npm start
 ## 📁 プロジェクト構造
 
 ```
-aws-icons-puzzle/
+aws-icon-pazzle/
 ├── public/
 │   ├── assets/                    # AWSアイコンファイル
 │   │   ├── Arch_Compute/48/      # Computeサービスアイコン
@@ -116,26 +116,18 @@ aws-icons-puzzle/
 2. `npm install` で依存関係を再インストール
 3. ブラウザのキャッシュをクリア
 
-## 📝 開発履歴
-
-- **v1.0.0**: 基本的なぷよぷよゲーム実装
-- **v1.1.0**: AWSアイコン統合、カテゴリベース判定
-- **v1.2.0**: 個別ぷよ落下システム、連鎖システム改善
-- **v1.3.0**: アイコン読み込み修正、デバッグ機能追加
-- **v1.4.0**: AWS Icons Puzzleに名称変更、プロジェクト最適化
-
 ## 🤝 コントリビューション
 
 プルリクエストやイシューの報告を歓迎します。新しいAWSサービスの追加や機能改善のご提案をお待ちしています。
 
 ## 📄 ライセンス
 
-このプロジェクトはMITライセンスの下で公開されています。
+このプロジェクトは現在ライセンスが設定されていません。
 
 ## 🙏 謝辞
 
-- AWSアーキテクチャアイコンはAmazon Web Services, Inc.の提供によるものです
-- ぷよぷよのゲームルールは株式会社セガの「ぷよぷよ」を参考にしています
+- AWSアーキテクチャアイコンは[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)から取得したものです
+- ぷよぷよのゲームルールを参考にしていますが、これは独自の実装です
 
 ---
 
